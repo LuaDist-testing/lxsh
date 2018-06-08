@@ -1,6 +1,6 @@
 .sourcecode .comment { color:#558817; }
 .sourcecode .constant { color:#A8660D; }
-.sourcecode { color:#000000; background:#FFFFFF; }
+.sourcecode { font-family: Monaco, Consolas, monospace; color:#000000; background:#FFFFFF; }
 .sourcecode .escape { color:#844631; }
 .sourcecode .keyword { color:#2239A8; font-weight:bold; }
 .sourcecode .library { color:#0E7C6B !important; }

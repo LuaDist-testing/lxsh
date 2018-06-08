@@ -1,6 +1,6 @@
 # LXSH: Lexing & Syntax Highlighting in Lua
 
-LXSH is a collection of [lexers] [lexing] and [syntax highlighters] [highlighting] written in [Lua] [lua] using the excellent pattern-matching library [LPeg] [lpeg]. Two programming languages are currently supported, these are Lua and C. The syntax highlighters support three output formats: [HTML] [html] designed to be easily embedded in web pages, [LaTeX] [latex] which can be used to generate high quality PDF files and [RTF] [rtf] which can be used in graphical text editors like Microsoft Word and LibreOffice (formerly OpenOffice). Three predefined color schemes are included. Here are some examples of the supported input languages, output formats and color schemes:
+LXSH is a collection of [lexers] [lexing] and [syntax highlighters] [highlighting] written in [Lua] [lua] using the excellent pattern-matching library [LPeg] [lpeg]. Several syntaxes are currently supported: Lua, C, BibTeX and shell script. The syntax highlighters support three output formats: [HTML] [html] designed to be easily embedded in web pages, [LaTeX] [latex] which can be used to generate high quality PDF files and [RTF] [rtf] which can be used in graphical text editors like Microsoft Word and LibreOffice (formerly OpenOffice). Three predefined color schemes are included. Here are some examples of the supported input languages, output formats and color schemes:
 
 <table cellspacing=0 cellpadding=4>
  <tr>
@@ -81,6 +81,54 @@ LXSH is a collection of [lexers] [lexing] and [syntax highlighters] [highlightin
    <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/lua_apr.c.rtf">RTF</a>
   </td>
  </tr>
+ <tr>
+  <th style="border-right:1px solid silver; text-align: right">BibTeX:</th>
+  <td style="border-right: 1px solid silver; border-bottom: 1px solid silver">
+   <a href="http://peterodding.com/code/lua/lxsh/examples/earendel/entry.bib.html">HTML</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/earendel/entry.bib.pdf">PDF</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/earendel/entry.bib.rtf">RTF</a>
+  </td>
+  <td style="border-right: 1px solid silver; border-bottom: 1px solid silver">
+   <a href="http://peterodding.com/code/lua/lxsh/examples/slate/entry.bib.html">HTML</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/slate/entry.bib.pdf">PDF</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/slate/entry.bib.rtf">RTF</a>
+  </td>
+  <td style="border-right: 1px solid silver; border-bottom: 1px solid silver">
+   <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/entry.bib.html">HTML</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/entry.bib.pdf">PDF</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/entry.bib.rtf">RTF</a>
+  </td>
+ </tr>
+ <tr>
+  <th style="border-right:1px solid silver; text-align: right">Shell script:</th>
+  <td style="border-right: 1px solid silver; border-bottom: 1px solid silver">
+   <a href="http://peterodding.com/code/lua/lxsh/examples/earendel/gvim.sh.html">HTML</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/earendel/gvim.sh.pdf">PDF</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/earendel/gvim.sh.rtf">RTF</a>
+  </td>
+  <td style="border-right: 1px solid silver; border-bottom: 1px solid silver">
+   <a href="http://peterodding.com/code/lua/lxsh/examples/slate/gvim.sh.html">HTML</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/slate/gvim.sh.pdf">PDF</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/slate/gvim.sh.rtf">RTF</a>
+  </td>
+  <td style="border-right: 1px solid silver; border-bottom: 1px solid silver">
+   <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/gvim.sh.html">HTML</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/gvim.sh.pdf">PDF</a>
+   <span style="color: silver">·</span>
+   <a href="http://peterodding.com/code/lua/lxsh/examples/wiki/gvim.sh.rtf">RTF</a>
+  </td>
+ </tr>
 </table>
 
 As you may have noticed in the above examples, the syntax highlighters replace standard library identifiers (and then some) with hyperlinks to the relevant documentation. You can also try switching between style sheets while staying on the same web page by using your web browser's *View → Page styles* menu (this works using so-called "alternate style sheets").
@@ -89,7 +137,7 @@ As you may have noticed in the above examples, the syntax highlighters replace s
 
 The easiest way to download and install LXSH is using [LuaRocks] [luarocks]:
 
-    $ luarocks install http://peterodding.com/code/lua/lxsh/downloads/lxsh-0.8-1.rockspec
+    $ luarocks install lxsh
 
 If you don't have LuaRocks installed you can [download the latest release] [zipball] directly from GitHub as a ZIP archive. To install create an `lxsh` directory in your [$LUA_PATH] [lua_path] and copy the contents of the `src` directory from the ZIP archive to the `lxsh` directory so that you end up with the following structure:
 
@@ -102,35 +150,35 @@ If you don't have LuaRocks installed you can [download the latest release] [zipb
 
 ## Usage
 
-If you want to call a lexer or access an LPeg pattern defined by the lexer you can do so as follows (this example demonstrates the Lua lexer but the C lexer works the same):
+If you want to call a lexer or access an LPeg pattern defined by a lexer you can do so as follows (this example demonstrates the Lua lexer but the other lexers work the same way):
 
     > -- Load the LXSH module.
     > require 'lxsh'
 
     > -- Run the lexer on a string of source code.
-    > for kind, text in lxsh.lexers.lua.gmatch 'i = i + 1 -- example' do
-    >>  print(kind, text)
+    > for kind, text, lnum, cnum in lxsh.lexers.lua.gmatch 'i = i + 1\n-- example' do
+    >>  print(string.format('%s: %q (%i:%i)', kind, text, lnum, cnum))
     >> end
-    identifier  i
-    whitespace   
-    operator    =
-    whitespace   
-    identifier  i
-    whitespace   
-    operator    +
-    whitespace   
-    number      1
-    whitespace   
-    comment     -- example
+    identifier: "i" (1:1)
+    whitespace: " " (1:2)
+    operator:   "=" (1:3)
+    whitespace: " " (1:4)
+    identifier: "i" (1:5)
+    whitespace: " " (1:6)
+    operator:   "+" (1:7)
+    whitespace: " " (1:8)
+    number:     "1" (1:9)
+    whitespace: "\n" (1:10)
+    comment:    "-- example" (2:1)
 
     > -- Use one of the patterns defined by the lexer.
     > lxsh.lexers.lua.patterns.comment:match '--[=[ this is a long comment ]=]'
 
-Lexers define the following functions:
+Note that you only need to load the main LXSH module with `require()`, the lexer and highlighter submodules are automatically loaded as they're first used. Lexers define the following functions:
 
  * `lexer.find(subject [, init [, options ]])` takes a string and optional starting position, matches a single token (anchored) and returns two values: the token kind and the last matched character
  * `lexer.match(subject [, init [, options ]])` takes a string and optional starting position, matches a single token (anchored) and returns two values: the token kind and the matched text
- * `lexer.gmatch(subject [, options])` returns an iterator that produces two values on each iteration: the token kind and the matched text
+ * `lexer.gmatch(subject [, options])` returns an iterator that produces four values on each iteration: the kind of token (see below), the matched text, the starting line number and the starting column number (line and column numbers start at 1)
 
 When `options` is given it should be a table of options that can be used to configure lexers. Currently only one option is defined: When you pass `join_identifiers=true` to the Lua lexer, expressions like `io.write` will be matched as a single identifier instead of the sequence (identifier `io`, operator `.`, identifier `write`).
 
@@ -177,6 +225,29 @@ The C lexer produces the following tokens:
  * operator
  * preprocessor
  * whitespace
+
+The BibTeX lexer produces the following tokens:
+
+ * entry (e.g. `@Book`)
+ * field (e.g. `author`)
+ * identifier
+ * string
+ * number
+ * operator
+ * delimiter
+ * whitespace
+ * error (invalid input)
+
+The shell script lexer produces the following tokens:
+
+ * comment
+ * number
+ * string
+ * variable
+ * operator
+ * keyword
+ * command
+ * error (invalid input)
 
 ## Contact
 

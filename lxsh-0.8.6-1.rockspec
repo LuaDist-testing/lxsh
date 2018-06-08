@@ -5,27 +5,27 @@
  This is the LuaRocks rockspec for the LXSH module.
 
  Author: Peter Odding <peter@peterodding.com>
- Last Change: July 18, 2011
+ Last Change: October 04, 2011
  Homepage: http://peterodding.com/code/lua/lxsh
 
 ]]
 
 package = 'LXSH'
-version = '0.8-1'
+version = '0.8.6-1'
 
 -- LuaDist source
 source = {
-  tag = "0.8-1",
+  tag = "0.8.6-1",
   url = "git://github.com/LuaDist-testing/lxsh.git"
 }
 -- Original source
 -- source = {
---   url = 'http://peterodding.com/code/lua/lxsh/downloads/lxsh-0.8-1.zip',
---   md5 = 'f4b9ae2ff9eeb41d27594459e289d0bb',
+--   url = 'http://peterodding.com/code/lua/lxsh/downloads/lxsh-0.8.6-1.zip',
+--   md5 = 'a9d4bd853f9756f8e8bfe0945b835161',
 -- }
 
 description = {
-  summary = 'LXSH - Lexing & syntax highlighting in Lua',
+  summary = 'Lexing & syntax highlighting in Lua',
   detailed = [[
     LXSH is a collection of lexers and syntax highlighters written in Lua using
     the excellent pattern-matching library LPeg. The syntax highlighters can
@@ -47,11 +47,16 @@ build = {
     ['lxsh.lexers.init'] = 'src/lexers/init.lua',
     ['lxsh.lexers.lua'] = 'src/lexers/lua.lua',
     ['lxsh.lexers.c'] = 'src/lexers/c.lua',
+    ['lxsh.lexers.bib'] = 'src/lexers/bib.lua',
+    ['lxsh.lexers.sh'] = 'src/lexers/sh.lua',
     ['lxsh.highlighters.init'] = 'src/highlighters/init.lua',
     ['lxsh.highlighters.lua'] = 'src/highlighters/lua.lua',
     ['lxsh.highlighters.c'] = 'src/highlighters/c.lua',
+    ['lxsh.highlighters.bib'] = 'src/highlighters/bib.lua',
+    ['lxsh.highlighters.sh'] = 'src/highlighters/sh.lua',
     ['lxsh.docs.lua'] = 'src/docs/lua.lua',
     ['lxsh.docs.c'] = 'src/docs/c.lua',
+    ['lxsh.docs.bib'] = 'src/docs/bib.lua',
     ['lxsh.formatters.html'] = 'src/formatters/html.lua',
     ['lxsh.formatters.latex'] = 'src/formatters/latex.lua',
     ['lxsh.formatters.rtf'] = 'src/formatters/rtf.lua',
